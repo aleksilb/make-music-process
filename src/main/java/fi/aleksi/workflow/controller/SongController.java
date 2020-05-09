@@ -26,8 +26,9 @@ public class SongController {
     }
 
     @PostMapping("/song")
-    public void postSong(@RequestBody Song song) {
+    public Song postSong(@RequestBody Song song) {
         songRepository.save(song);
+        return song;
     }
 
     @PostMapping("/song/{id}/start")
