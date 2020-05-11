@@ -5,7 +5,7 @@
       <bpmn:outgoing>Flow_0smy59p</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:endEvent id="Event_1rzt22f">
-      <bpmn:incoming>Flow_0smiu1k</bpmn:incoming>
+      <bpmn:incoming>Flow_1638nd2</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:intermediateCatchEvent id="Event_065td5h" name="Wait 15 mins">
       <bpmn:incoming>Flow_12nyscm</bpmn:incoming>
@@ -33,7 +33,7 @@
       <bpmn:incoming>Flow_063jn7w</bpmn:incoming>
       <bpmn:outgoing>Flow_0smiu1k</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:sequenceFlow id="Flow_0smiu1k" sourceRef="choose-best" targetRef="Event_1rzt22f" />
+    <bpmn:sequenceFlow id="Flow_0smiu1k" sourceRef="choose-best" targetRef="Activity_12366yf" />
     <bpmn:sequenceFlow id="Flow_0h4fvdf" sourceRef="Event_065td5h" targetRef="how-many-loops" />
     <bpmn:sequenceFlow id="Flow_0yp4zyw" sourceRef="how-many-loops" targetRef="Gateway_1ypep9x" />
     <bpmn:sequenceFlow id="Flow_1yvngwi" sourceRef="Activity_0zfqhsm" targetRef="Gateway_1ypep9x" />
@@ -43,14 +43,14 @@
     <bpmn:sequenceFlow id="Flow_063jn7w" name="enough" sourceRef="Gateway_1ypep9x" targetRef="choose-best">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${loops &gt;= 3 &amp;&amp; loops &lt;= 6}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_0smy59p" sourceRef="Event_04wb68m" targetRef="start-making-loops" />
+    <bpmn:sequenceFlow id="Flow_0smy59p" sourceRef="Event_04wb68m" targetRef="Activity_0zu92vi" />
     <bpmn:sequenceFlow id="Flow_12nyscm" sourceRef="start-making-loops" targetRef="Event_065td5h" />
     <bpmn:sequenceFlow id="Flow_1122s0i" name="not enough" sourceRef="Gateway_1ypep9x" targetRef="start-making-loops">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${loops &lt; 3}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:userTask id="start-making-loops" name="Start making loops">
-      <bpmn:incoming>Flow_0smy59p</bpmn:incoming>
       <bpmn:incoming>Flow_1122s0i</bpmn:incoming>
+      <bpmn:incoming>Flow_0jdcdpe</bpmn:incoming>
       <bpmn:outgoing>Flow_12nyscm</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:sequenceFlow id="Flow_1wczaqp" sourceRef="delete-loops" targetRef="Activity_0zfqhsm" />
@@ -58,60 +58,105 @@
       <bpmn:incoming>Flow_1wczaqp</bpmn:incoming>
       <bpmn:outgoing>Flow_1yvngwi</bpmn:outgoing>
     </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0jdcdpe" sourceRef="Activity_0zu92vi" targetRef="start-making-loops" />
+    <bpmn:sequenceFlow id="Flow_1638nd2" sourceRef="Activity_12366yf" targetRef="Event_1rzt22f" />
+    <bpmn:serviceTask id="Activity_0zu92vi" name="Set loop status" camunda:delegateExpression="${setLoopStatusTask}">
+      <bpmn:incoming>Flow_0smy59p</bpmn:incoming>
+      <bpmn:outgoing>Flow_0jdcdpe</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_12366yf" name="Set finished status" camunda:class="fi.aleksi.workflow.task.SetFinishedStatusTask">
+      <bpmn:incoming>Flow_0smiu1k</bpmn:incoming>
+      <bpmn:outgoing>Flow_1638nd2</bpmn:outgoing>
+    </bpmn:serviceTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="make_loop">
+      <bpmndi:BPMNEdge id="Flow_1wczaqp_di" bpmnElement="Flow_1wczaqp">
+        <di:waypoint x="880" y="280" />
+        <di:waypoint x="950" y="280" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1122s0i_di" bpmnElement="Flow_1122s0i">
-        <di:waypoint x="718" y="153" />
-        <di:waypoint x="620" y="260" />
-        <di:waypoint x="350" y="260" />
-        <di:waypoint x="350" y="180" />
+        <di:waypoint x="818" y="153" />
+        <di:waypoint x="720" y="260" />
+        <di:waypoint x="450" y="260" />
+        <di:waypoint x="450" y="180" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="458" y="242" width="56" height="14" />
+          <dc:Bounds x="558" y="242" width="56" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_12nyscm_di" bpmnElement="Flow_12nyscm">
-        <di:waypoint x="400" y="140" />
-        <di:waypoint x="452" y="140" />
+        <di:waypoint x="500" y="140" />
+        <di:waypoint x="552" y="140" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0smy59p_di" bpmnElement="Flow_0smy59p">
         <di:waypoint x="198" y="140" />
-        <di:waypoint x="300" y="140" />
+        <di:waypoint x="250" y="140" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_063jn7w_di" bpmnElement="Flow_063jn7w">
-        <di:waypoint x="755" y="140" />
-        <di:waypoint x="850" y="140" />
+        <di:waypoint x="855" y="140" />
+        <di:waypoint x="950" y="140" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="784" y="122" width="37" height="14" />
+          <dc:Bounds x="884" y="122" width="37" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0lwyjgb_di" bpmnElement="Flow_0lwyjgb">
-        <di:waypoint x="730" y="165" />
-        <di:waypoint x="730" y="240" />
+        <di:waypoint x="830" y="165" />
+        <di:waypoint x="830" y="240" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="737" y="203" width="45" height="14" />
+          <dc:Bounds x="837" y="203" width="45" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1yvngwi_di" bpmnElement="Flow_1yvngwi">
-        <di:waypoint x="861" y="240" />
-        <di:waypoint x="744" y="151" />
+        <di:waypoint x="961" y="240" />
+        <di:waypoint x="844" y="151" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0yp4zyw_di" bpmnElement="Flow_0yp4zyw">
-        <di:waypoint x="670" y="140" />
-        <di:waypoint x="705" y="140" />
+        <di:waypoint x="770" y="140" />
+        <di:waypoint x="805" y="140" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0h4fvdf_di" bpmnElement="Flow_0h4fvdf">
-        <di:waypoint x="488" y="140" />
-        <di:waypoint x="570" y="140" />
+        <di:waypoint x="588" y="140" />
+        <di:waypoint x="670" y="140" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0smiu1k_di" bpmnElement="Flow_0smiu1k">
-        <di:waypoint x="950" y="140" />
-        <di:waypoint x="1022" y="140" />
+        <di:waypoint x="1050" y="140" />
+        <di:waypoint x="1090" y="140" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1wczaqp_di" bpmnElement="Flow_1wczaqp">
-        <di:waypoint x="780" y="280" />
-        <di:waypoint x="850" y="280" />
+      <bpmndi:BPMNEdge id="Flow_0jdcdpe_di" bpmnElement="Flow_0jdcdpe">
+        <di:waypoint x="350" y="140" />
+        <di:waypoint x="400" y="140" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1638nd2_di" bpmnElement="Flow_1638nd2">
+        <di:waypoint x="1190" y="140" />
+        <di:waypoint x="1252" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_065td5h_di" bpmnElement="Event_065td5h">
+        <dc:Bounds x="552" y="122" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="539" y="165" width="63" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1yp8lq8_di" bpmnElement="how-many-loops">
+        <dc:Bounds x="670" y="100" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1ypep9x_di" bpmnElement="Gateway_1ypep9x" isMarkerVisible="true">
+        <dc:Bounds x="805" y="115" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="807" y="91" width="45" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_06m4d0g_di" bpmnElement="delete-loops">
+        <dc:Bounds x="780" y="240" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1sgzjme_di" bpmnElement="choose-best">
+        <dc:Bounds x="950" y="100" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0hwysv1_di" bpmnElement="start-making-loops">
+        <dc:Bounds x="400" y="100" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0l5zxa3_di" bpmnElement="Activity_0zfqhsm">
+        <dc:Bounds x="950" y="240" width="100" height="80" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_04wb68m_di" bpmnElement="Event_04wb68m">
         <dc:Bounds x="162" y="122" width="36" height="36" />
         <bpmndi:BPMNLabel>
@@ -119,34 +164,13 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1rzt22f_di" bpmnElement="Event_1rzt22f">
-        <dc:Bounds x="1022" y="122" width="36" height="36" />
+        <dc:Bounds x="1252" y="122" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_065td5h_di" bpmnElement="Event_065td5h">
-        <dc:Bounds x="452" y="122" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="439" y="165" width="63" height="14" />
-        </bpmndi:BPMNLabel>
+      <bpmndi:BPMNShape id="Activity_1j2yr7g_di" bpmnElement="Activity_0zu92vi">
+        <dc:Bounds x="250" y="100" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1yp8lq8_di" bpmnElement="how-many-loops">
-        <dc:Bounds x="570" y="100" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_1ypep9x_di" bpmnElement="Gateway_1ypep9x" isMarkerVisible="true">
-        <dc:Bounds x="705" y="115" width="50" height="50" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="707" y="91" width="45" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1sgzjme_di" bpmnElement="choose-best">
-        <dc:Bounds x="850" y="100" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0hwysv1_di" bpmnElement="start-making-loops">
-        <dc:Bounds x="300" y="100" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_06m4d0g_di" bpmnElement="delete-loops">
-        <dc:Bounds x="680" y="240" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0l5zxa3_di" bpmnElement="Activity_0zfqhsm">
-        <dc:Bounds x="850" y="240" width="100" height="80" />
+      <bpmndi:BPMNShape id="Activity_1mx0i5i_di" bpmnElement="Activity_12366yf">
+        <dc:Bounds x="1090" y="100" width="100" height="80" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
