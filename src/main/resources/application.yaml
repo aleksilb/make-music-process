@@ -1,0 +1,14 @@
+#spring.datasource.url: jdbc:h2:file:./camunda-h2-database
+#
+#camunda.bpm.admin-user:
+#  id: demo
+#  password: demo
+
+camunda.bpm.database:
+  type: postgres
+#  table-prefix: camunda_
+#  schema-update: create-drop
+spring.datasource:
+  url: jdbc:postgresql://localhost:5432/make_music
+  username: postgres
+  password: Sin4ku9m
