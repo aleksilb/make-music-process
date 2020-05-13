@@ -64,13 +64,21 @@
       <bpmn:incoming>Flow_0smy59p</bpmn:incoming>
       <bpmn:outgoing>Flow_0jdcdpe</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="Activity_12366yf" name="Set finished status" camunda:class="fi.aleksi.workflow.task.SetFinishedStatusTask">
+    <bpmn:serviceTask id="Activity_12366yf" name="Set finished status" camunda:delegateExpression="${setFinishedStatusTask}">
       <bpmn:incoming>Flow_0smiu1k</bpmn:incoming>
       <bpmn:outgoing>Flow_1638nd2</bpmn:outgoing>
     </bpmn:serviceTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="make_loop">
+      <bpmndi:BPMNEdge id="Flow_1638nd2_di" bpmnElement="Flow_1638nd2">
+        <di:waypoint x="1190" y="140" />
+        <di:waypoint x="1252" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0jdcdpe_di" bpmnElement="Flow_0jdcdpe">
+        <di:waypoint x="350" y="140" />
+        <di:waypoint x="400" y="140" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1wczaqp_di" bpmnElement="Flow_1wczaqp">
         <di:waypoint x="880" y="280" />
         <di:waypoint x="950" y="280" />
@@ -122,14 +130,15 @@
         <di:waypoint x="1050" y="140" />
         <di:waypoint x="1090" y="140" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0jdcdpe_di" bpmnElement="Flow_0jdcdpe">
-        <di:waypoint x="350" y="140" />
-        <di:waypoint x="400" y="140" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1638nd2_di" bpmnElement="Flow_1638nd2">
-        <di:waypoint x="1190" y="140" />
-        <di:waypoint x="1252" y="140" />
-      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_04wb68m_di" bpmnElement="Event_04wb68m">
+        <dc:Bounds x="162" y="122" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="154" y="165" width="52" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1rzt22f_di" bpmnElement="Event_1rzt22f">
+        <dc:Bounds x="1252" y="122" width="36" height="36" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_065td5h_di" bpmnElement="Event_065td5h">
         <dc:Bounds x="552" y="122" width="36" height="36" />
         <bpmndi:BPMNLabel>
@@ -156,15 +165,6 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0l5zxa3_di" bpmnElement="Activity_0zfqhsm">
         <dc:Bounds x="950" y="240" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_04wb68m_di" bpmnElement="Event_04wb68m">
-        <dc:Bounds x="162" y="122" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="154" y="165" width="52" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1rzt22f_di" bpmnElement="Event_1rzt22f">
-        <dc:Bounds x="1252" y="122" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1j2yr7g_di" bpmnElement="Activity_0zu92vi">
         <dc:Bounds x="250" y="100" width="100" height="80" />

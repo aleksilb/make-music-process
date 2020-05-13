@@ -1,6 +1,7 @@
 package fi.aleksi.workflow.controller;
 
 import fi.aleksi.workflow.entity.Song;
+import fi.aleksi.workflow.entity.SongStatus;
 import fi.aleksi.workflow.process.SongProcess;
 import fi.aleksi.workflow.repository.SongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class SongController {
 
     @GetMapping("/song")
     public List<Song> getAllSongs() {
-        return songRepository.findAll();
+        return songRepository.findByStatusNot(SongStatus.FINISHED);
     }
 
     @PostMapping("/song")

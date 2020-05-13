@@ -5,5 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class SetLoopStatusTask extends SetStatusTask {
-    protected final static SongStatus songStatus = SongStatus.LOOP;
+    public SetLoopStatusTask() {
+        this.songStatus = SongStatus.LOOP;
+    }
 }

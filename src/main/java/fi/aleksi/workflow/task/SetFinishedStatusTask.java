@@ -5,5 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class SetFinishedStatusTask extends SetStatusTask {
-    protected final static SongStatus songStatus = SongStatus.FINISHED;
+    public SetFinishedStatusTask() {
+        this.songStatus = SongStatus.FINISHED;
+    }
 }
