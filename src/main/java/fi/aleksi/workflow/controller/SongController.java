@@ -32,6 +32,11 @@ public class SongController {
         return song;
     }
 
+    @GetMapping("/song/{id}")
+    public Song getSong(@PathVariable Long id) throws Exception {
+        return songRepository.findById(id).orElseThrow(() -> new Exception("No song found with id " + id));
+    }
+
     @PostMapping("/song/{id}/start")
     public void startSong(@PathVariable Long id) {
         songProcess.startSong(id);
