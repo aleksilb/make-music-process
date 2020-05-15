@@ -14,7 +14,7 @@
         <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT15M</bpmn:timeDuration>
       </bpmn:timerEventDefinition>
     </bpmn:intermediateCatchEvent>
-    <bpmn:userTask id="how-many-loops" name="How many?">
+    <bpmn:userTask id="how-many-loops" name="How many?" camunda:formKey="how-many-loops">
       <bpmn:incoming>Flow_0h4fvdf</bpmn:incoming>
       <bpmn:outgoing>Flow_0yp4zyw</bpmn:outgoing>
     </bpmn:userTask>
@@ -25,11 +25,11 @@
       <bpmn:outgoing>Flow_063jn7w</bpmn:outgoing>
       <bpmn:outgoing>Flow_1122s0i</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:userTask id="delete-loops" name="Delete loop(s)">
+    <bpmn:userTask id="delete-loops" name="Delete loop(s)" camunda:formKey="delete-loops">
       <bpmn:incoming>Flow_0lwyjgb</bpmn:incoming>
       <bpmn:outgoing>Flow_1wczaqp</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="choose-best" name="Choose best">
+    <bpmn:userTask id="choose-best" name="Choose best" camunda:formKey="choose-best">
       <bpmn:incoming>Flow_063jn7w</bpmn:incoming>
       <bpmn:outgoing>Flow_0smiu1k</bpmn:outgoing>
     </bpmn:userTask>
@@ -48,7 +48,7 @@
     <bpmn:sequenceFlow id="Flow_1122s0i" name="not enough" sourceRef="Gateway_1ypep9x" targetRef="start-making-loops">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${loops &lt; 3}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:userTask id="start-making-loops" name="Start making loops">
+    <bpmn:userTask id="start-making-loops" name="Start making loops" camunda:formKey="start-making-loops">
       <bpmn:incoming>Flow_1122s0i</bpmn:incoming>
       <bpmn:incoming>Flow_0jdcdpe</bpmn:incoming>
       <bpmn:outgoing>Flow_12nyscm</bpmn:outgoing>
