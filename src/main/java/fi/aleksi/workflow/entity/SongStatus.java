@@ -1,5 +1,5 @@
 package fi.aleksi.workflow.entity;
 
 public enum SongStatus {
-    NOT_STARTED, LOOP, FINISHED
+    NOT_STARTED, IN_PROGRESS, FINISHED
 }
