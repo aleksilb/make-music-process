@@ -1,8 +1,10 @@
 package fi.aleksi.workflow.controller;
 
+import fi.aleksi.workflow.entity.Instrument;
 import fi.aleksi.workflow.entity.Song;
 import fi.aleksi.workflow.entity.SongStatus;
 import fi.aleksi.workflow.process.SongProcess;
+import fi.aleksi.workflow.repository.InstrumentRepository;
 import fi.aleksi.workflow.repository.SongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,11 +16,13 @@ public class SongController {
 
     private final SongRepository songRepository;
     private final SongProcess songProcess;
+    private final InstrumentRepository instrumentRepository;
 
     @Autowired
-    public SongController(SongRepository songRepository, SongProcess songProcess) {
+    public SongController(SongRepository songRepository, SongProcess songProcess, InstrumentRepository instrumentRepository) {
         this.songRepository = songRepository;
         this.songProcess = songProcess;
+        this.instrumentRepository = instrumentRepository;
     }
 
     @GetMapping("/song")
@@ -46,5 +50,10 @@ public class SongController {
     @PostMapping("/song/{id}/start")
     public void startSong(@PathVariable Long id) {
         songProcess.startSong(id);
+    }
+
+    @GetMapping("/instrument")
+    public List<Instrument> getAllInstruments() {
+        return instrumentRepository.findAll();
     }
 }

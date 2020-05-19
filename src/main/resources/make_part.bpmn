@@ -45,6 +45,7 @@ return instruments.length === 0;</bpmn:conditionExpression>
     <bpmn:callActivity id="Activity_0xphrs1" name="Make loop" calledElement="make_loop">
       <bpmn:extensionElements>
         <camunda:in businessKey="#{execution.processBusinessKey}" />
+        <camunda:in source="selected_instrument" target="selected_instrument" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_1civqjw</bpmn:incoming>
       <bpmn:outgoing>Flow_1vu7iq7</bpmn:outgoing>
@@ -57,7 +58,7 @@ return instruments.length === 0;</bpmn:conditionExpression>
       <bpmn:incoming>Flow_1wjdfhx</bpmn:incoming>
       <bpmn:outgoing>Flow_0iiohi1</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:serviceTask id="Activity_0chn4hp" name="Instrument finished" camunda:class="fi.aleksi.workflow.task.InstrumentFinishedTask">
+    <bpmn:serviceTask id="Activity_0chn4hp" name="Instrument finished" camunda:delegateExpression="${instrumentFinishedTask}">
       <bpmn:incoming>Flow_1vu7iq7</bpmn:incoming>
       <bpmn:outgoing>Flow_1jcn5gb</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -65,6 +66,10 @@ return instruments.length === 0;</bpmn:conditionExpression>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="make_part">
+      <bpmndi:BPMNEdge id="Flow_1jcn5gb_di" bpmnElement="Flow_1jcn5gb">
+        <di:waypoint x="720" y="177" />
+        <di:waypoint x="755" y="177" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0fvd465_di" bpmnElement="Flow_0fvd465">
         <di:waypoint x="310" y="177" />
         <di:waypoint x="340" y="177" />
@@ -117,10 +122,6 @@ return instruments.length === 0;</bpmn:conditionExpression>
         <di:waypoint x="188" y="177" />
         <di:waypoint x="210" y="177" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1jcn5gb_di" bpmnElement="Flow_1jcn5gb">
-        <di:waypoint x="720" y="177" />
-        <di:waypoint x="755" y="177" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
         <dc:Bounds x="152" y="159" width="36" height="36" />
       </bpmndi:BPMNShape>
@@ -142,14 +143,14 @@ return instruments.length === 0;</bpmn:conditionExpression>
       <bpmndi:BPMNShape id="Activity_0fbezpe_di" bpmnElement="choose_instrument">
         <dc:Bounds x="340" y="137" width="100" height="80" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0u4ar07_di" bpmnElement="Activity_0xphrs1">
+        <dc:Bounds x="490" y="137" width="100" height="80" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_025c3px_di" bpmnElement="Activity_01haosi">
         <dc:Bounds x="210" y="137" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1sper05_di" bpmnElement="add_more_instruments">
         <dc:Bounds x="840" y="240" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0u4ar07_di" bpmnElement="Activity_0xphrs1">
-        <dc:Bounds x="490" y="137" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0chn4hp_di" bpmnElement="Activity_0chn4hp">
         <dc:Bounds x="620" y="137" width="100" height="80" />
