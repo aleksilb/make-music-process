@@ -48,7 +48,7 @@
       <bpmn:incoming>Flow_1civqjw</bpmn:incoming>
       <bpmn:outgoing>Flow_1vu7iq7</bpmn:outgoing>
     </bpmn:callActivity>
-    <bpmn:userTask id="add_more_instruments" name="Add more instruments?" camunda:formKey="add_more_instruments">
+    <bpmn:userTask id="add_more_instruments" name="Add more instruments?" camunda:formKey="add-more-instruments">
       <bpmn:incoming>Flow_1wjdfhx</bpmn:incoming>
       <bpmn:outgoing>Flow_0iiohi1</bpmn:outgoing>
     </bpmn:userTask>
