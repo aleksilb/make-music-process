@@ -1,5 +1,5 @@
 package fi.aleksi.workflow.entity;
 
 public enum InstrumentType {
-    LEAD, PAD, DRUMS
+    LEAD, PAD, DRUMS, BASS
 }
