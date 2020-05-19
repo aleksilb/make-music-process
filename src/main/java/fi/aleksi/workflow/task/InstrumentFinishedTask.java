@@ -26,7 +26,7 @@ public class InstrumentFinishedTask implements JavaDelegate {
 
     @Override
     public void execute(DelegateExecution execution) {
-        InstrumentType selectedInstrument = (InstrumentType) execution.getVariable(ProcessVariables.SELECTED_INSTRUMENT);
+        InstrumentType selectedInstrument = InstrumentType.valueOf((String) execution.getVariable(ProcessVariables.SELECTED_INSTRUMENT));
         Instrument instrument = instrumentRepository.getInstrumentByType(selectedInstrument);
         Long songId = (Long) execution.getVariable(ProcessVariables.SONG_ID);
 
