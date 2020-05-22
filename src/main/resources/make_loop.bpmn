@@ -11,7 +11,7 @@
       <bpmn:incoming>Flow_12nyscm</bpmn:incoming>
       <bpmn:outgoing>Flow_0h4fvdf</bpmn:outgoing>
       <bpmn:timerEventDefinition id="TimerEventDefinition_1exj2l1">
-        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT1M</bpmn:timeDuration>
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT15M</bpmn:timeDuration>
       </bpmn:timerEventDefinition>
     </bpmn:intermediateCatchEvent>
     <bpmn:userTask id="how-many-loops" name="How many?" camunda:formKey="how-many-loops">

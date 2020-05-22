@@ -6,6 +6,7 @@ import fi.aleksi.workflow.entity.SongStatus;
 import fi.aleksi.workflow.process.SongProcess;
 import fi.aleksi.workflow.repository.InstrumentRepository;
 import fi.aleksi.workflow.repository.SongRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,6 +35,13 @@ public class SongController {
     public Song postSong(@RequestBody Song song) {
         songRepository.save(song);
         return song;
+    }
+
+    @PutMapping("/song/{id}")
+    public void updateSong(@PathVariable Long id, @RequestBody Song newSong) {
+        Song song = songRepository.getOne(id);
+        BeanUtils.copyProperties(newSong, song);
+        songRepository.save(song);
     }
 
     @GetMapping("/song/{id}")
