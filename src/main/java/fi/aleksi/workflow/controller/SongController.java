@@ -53,6 +53,7 @@ public class SongController {
     public void deleteSong(@PathVariable Long id) throws Exception {
         Song song = songRepository.findById(id).orElseThrow(() -> new Exception("No song found with id " + id));
         songRepository.delete(song);
+        songProcess.removeSong(id);
     }
 
     @PostMapping("/song/{id}/start")
