@@ -29,7 +29,12 @@
       <bpmn:incoming>Flow_0lwyjgb</bpmn:incoming>
       <bpmn:outgoing>Flow_1wczaqp</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="choose-best" name="Choose best" camunda:formKey="choose-best">
+    <bpmn:userTask id="choose-best" name="Choose best" camunda:formKey="simple-task">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="taskText">Choose best loop</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_063jn7w</bpmn:incoming>
       <bpmn:outgoing>Flow_0smiu1k</bpmn:outgoing>
     </bpmn:userTask>
@@ -48,7 +53,12 @@
     <bpmn:sequenceFlow id="Flow_1122s0i" name="not enough" sourceRef="Gateway_1ypep9x" targetRef="start-making-loops">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${loops &lt; 3}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:userTask id="start-making-loops" name="Start making loops" camunda:formKey="start-making-loops">
+    <bpmn:userTask id="start-making-loops" name="Start making loops" camunda:formKey="simple-task">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="taskText">Start making loops</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_1122s0i</bpmn:incoming>
       <bpmn:incoming>Flow_0smy59p</bpmn:incoming>
       <bpmn:outgoing>Flow_12nyscm</bpmn:outgoing>
