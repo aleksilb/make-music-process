@@ -34,12 +34,7 @@
     <bpmn:sequenceFlow id="Flow_1yn3yai" name="yes" sourceRef="Gateway_1u97ttv" targetRef="choose_instrument">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${moreInstruments}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:userTask id="choose_instrument" name="Choose instrument" camunda:formKey="simple-task">
-      <bpmn:extensionElements>
-        <camunda:inputOutput>
-          <camunda:inputParameter name="taskText">Choose instrument</camunda:inputParameter>
-        </camunda:inputOutput>
-      </bpmn:extensionElements>
+    <bpmn:userTask id="choose_instrument" name="Choose instrument" camunda:formKey="choose-instrument">
       <bpmn:incoming>Flow_1yn3yai</bpmn:incoming>
       <bpmn:incoming>Flow_1ma1856</bpmn:incoming>
       <bpmn:outgoing>Flow_1civqjw</bpmn:outgoing>
