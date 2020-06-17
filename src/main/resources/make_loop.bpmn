@@ -5,84 +5,82 @@
       <bpmn:outgoing>Flow_0smy59p</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:endEvent id="Event_1rzt22f">
-      <bpmn:incoming>Flow_0smiu1k</bpmn:incoming>
+      <bpmn:incoming>Flow_1keaoga</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:intermediateCatchEvent id="Event_065td5h" name="Wait 15 mins">
       <bpmn:incoming>Flow_12nyscm</bpmn:incoming>
+      <bpmn:incoming>Flow_0mw4t4e</bpmn:incoming>
       <bpmn:outgoing>Flow_0h4fvdf</bpmn:outgoing>
       <bpmn:timerEventDefinition id="TimerEventDefinition_1exj2l1">
-        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT15M</bpmn:timeDuration>
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT10M</bpmn:timeDuration>
       </bpmn:timerEventDefinition>
     </bpmn:intermediateCatchEvent>
-    <bpmn:userTask id="how-many-loops" name="How many?" camunda:formKey="how-many-loops">
-      <bpmn:incoming>Flow_0h4fvdf</bpmn:incoming>
-      <bpmn:outgoing>Flow_0yp4zyw</bpmn:outgoing>
-    </bpmn:userTask>
-    <bpmn:exclusiveGateway id="Gateway_1ypep9x" name="Enough?">
-      <bpmn:incoming>Flow_0yp4zyw</bpmn:incoming>
-      <bpmn:incoming>Flow_1yvngwi</bpmn:incoming>
-      <bpmn:outgoing>Flow_0lwyjgb</bpmn:outgoing>
-      <bpmn:outgoing>Flow_063jn7w</bpmn:outgoing>
-      <bpmn:outgoing>Flow_1122s0i</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
-    <bpmn:userTask id="delete-loops" name="Delete loop(s)" camunda:formKey="delete-loops">
-      <bpmn:incoming>Flow_0lwyjgb</bpmn:incoming>
-      <bpmn:outgoing>Flow_1wczaqp</bpmn:outgoing>
-    </bpmn:userTask>
-    <bpmn:userTask id="choose-best" name="Choose best" camunda:formKey="simple-task">
+    <bpmn:userTask id="how-many-loops" name="Make more?" camunda:formKey="yes-no-task">
       <bpmn:extensionElements>
         <camunda:inputOutput>
-          <camunda:inputParameter name="taskText">Choose best loop</camunda:inputParameter>
+          <camunda:inputParameter name="taskText">Make more patterns?</camunda:inputParameter>
+          <camunda:outputParameter name="makeMore">${choice}</camunda:outputParameter>
         </camunda:inputOutput>
       </bpmn:extensionElements>
-      <bpmn:incoming>Flow_063jn7w</bpmn:incoming>
-      <bpmn:outgoing>Flow_0smiu1k</bpmn:outgoing>
+      <bpmn:incoming>Flow_087ykzi</bpmn:incoming>
+      <bpmn:outgoing>Flow_11al4ey</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:sequenceFlow id="Flow_0smiu1k" sourceRef="choose-best" targetRef="Event_1rzt22f" />
-    <bpmn:sequenceFlow id="Flow_0h4fvdf" sourceRef="Event_065td5h" targetRef="how-many-loops" />
-    <bpmn:sequenceFlow id="Flow_0yp4zyw" sourceRef="how-many-loops" targetRef="Gateway_1ypep9x" />
-    <bpmn:sequenceFlow id="Flow_1yvngwi" sourceRef="Activity_0zfqhsm" targetRef="Gateway_1ypep9x" />
-    <bpmn:sequenceFlow id="Flow_0lwyjgb" name="too many" sourceRef="Gateway_1ypep9x" targetRef="delete-loops">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${loops &gt; 6}</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_063jn7w" name="enough" sourceRef="Gateway_1ypep9x" targetRef="choose-best">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${loops &gt;= 3 &amp;&amp; loops &lt;= 6}</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0h4fvdf" sourceRef="Event_065td5h" targetRef="Activity_0d7dkol" />
     <bpmn:sequenceFlow id="Flow_0smy59p" sourceRef="Event_04wb68m" targetRef="start-making-loops" />
     <bpmn:sequenceFlow id="Flow_12nyscm" sourceRef="start-making-loops" targetRef="Event_065td5h" />
-    <bpmn:sequenceFlow id="Flow_1122s0i" name="not enough" sourceRef="Gateway_1ypep9x" targetRef="start-making-loops">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${loops &lt; 3}</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:userTask id="start-making-loops" name="Start making loops" camunda:formKey="simple-task">
+    <bpmn:userTask id="start-making-loops" name="Choose instrument" camunda:formKey="simple-task">
       <bpmn:extensionElements>
         <camunda:inputOutput>
-          <camunda:inputParameter name="taskText">Start making loops</camunda:inputParameter>
+          <camunda:inputParameter name="taskText">Choose instrument</camunda:inputParameter>
         </camunda:inputOutput>
       </bpmn:extensionElements>
-      <bpmn:incoming>Flow_1122s0i</bpmn:incoming>
       <bpmn:incoming>Flow_0smy59p</bpmn:incoming>
       <bpmn:outgoing>Flow_12nyscm</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:sequenceFlow id="Flow_1wczaqp" sourceRef="delete-loops" targetRef="Activity_0zfqhsm" />
-    <bpmn:serviceTask id="Activity_0zfqhsm" name="Remove loops" camunda:expression="${loops - deleted}" camunda:resultVariable="loops">
-      <bpmn:incoming>Flow_1wczaqp</bpmn:incoming>
-      <bpmn:outgoing>Flow_1yvngwi</bpmn:outgoing>
-    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="Gateway_0zhpma1" name="make more?">
+      <bpmn:incoming>Flow_11al4ey</bpmn:incoming>
+      <bpmn:outgoing>Flow_1keaoga</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0mw4t4e</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_11al4ey" sourceRef="how-many-loops" targetRef="Gateway_0zhpma1" />
+    <bpmn:sequenceFlow id="Flow_1keaoga" name="no" sourceRef="Gateway_0zhpma1" targetRef="Event_1rzt22f">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!makeMore}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0mw4t4e" name="yes" sourceRef="Gateway_0zhpma1" targetRef="Event_065td5h">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${makeMore}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:userTask id="Activity_0d7dkol" name="Put in order" camunda:formKey="simple-task">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="taskText">Put patterns in order</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0h4fvdf</bpmn:incoming>
+      <bpmn:outgoing>Flow_087ykzi</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_087ykzi" sourceRef="Activity_0d7dkol" targetRef="how-many-loops" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="make_loop">
-      <bpmndi:BPMNEdge id="Flow_1wczaqp_di" bpmnElement="Flow_1wczaqp">
-        <di:waypoint x="730" y="280" />
-        <di:waypoint x="800" y="280" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1122s0i_di" bpmnElement="Flow_1122s0i">
-        <di:waypoint x="668" y="153" />
-        <di:waypoint x="570" y="260" />
-        <di:waypoint x="300" y="260" />
-        <di:waypoint x="300" y="180" />
+      <bpmndi:BPMNEdge id="Flow_0mw4t4e_di" bpmnElement="Flow_0mw4t4e">
+        <di:waypoint x="780" y="165" />
+        <di:waypoint x="780" y="240" />
+        <di:waypoint x="420" y="240" />
+        <di:waypoint x="420" y="158" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="408" y="242" width="56" height="14" />
+          <dc:Bounds x="552" y="222" width="17" height="14" />
         </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1keaoga_di" bpmnElement="Flow_1keaoga">
+        <di:waypoint x="805" y="140" />
+        <di:waypoint x="912" y="140" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="853" y="122" width="13" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_11al4ey_di" bpmnElement="Flow_11al4ey">
+        <di:waypoint x="710" y="140" />
+        <di:waypoint x="755" y="140" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_12nyscm_di" bpmnElement="Flow_12nyscm">
         <di:waypoint x="350" y="140" />
@@ -92,35 +90,13 @@
         <di:waypoint x="198" y="140" />
         <di:waypoint x="250" y="140" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_063jn7w_di" bpmnElement="Flow_063jn7w">
-        <di:waypoint x="705" y="140" />
-        <di:waypoint x="800" y="140" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="734" y="122" width="37" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0lwyjgb_di" bpmnElement="Flow_0lwyjgb">
-        <di:waypoint x="680" y="165" />
-        <di:waypoint x="680" y="240" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="687" y="203" width="45" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1yvngwi_di" bpmnElement="Flow_1yvngwi">
-        <di:waypoint x="811" y="240" />
-        <di:waypoint x="694" y="151" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0yp4zyw_di" bpmnElement="Flow_0yp4zyw">
-        <di:waypoint x="620" y="140" />
-        <di:waypoint x="655" y="140" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0h4fvdf_di" bpmnElement="Flow_0h4fvdf">
         <di:waypoint x="438" y="140" />
-        <di:waypoint x="520" y="140" />
+        <di:waypoint x="470" y="140" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0smiu1k_di" bpmnElement="Flow_0smiu1k">
-        <di:waypoint x="900" y="140" />
-        <di:waypoint x="962" y="140" />
+      <bpmndi:BPMNEdge id="Flow_087ykzi_di" bpmnElement="Flow_087ykzi">
+        <di:waypoint x="570" y="140" />
+        <di:waypoint x="610" y="140" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Event_04wb68m_di" bpmnElement="Event_04wb68m">
         <dc:Bounds x="162" y="122" width="36" height="36" />
@@ -128,35 +104,29 @@
           <dc:Bounds x="154" y="165" width="52" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1rzt22f_di" bpmnElement="Event_1rzt22f">
-        <dc:Bounds x="962" y="122" width="36" height="36" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_065td5h_di" bpmnElement="Event_065td5h">
         <dc:Bounds x="402" y="122" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="389" y="165" width="63" height="14" />
+          <dc:Bounds x="388" y="98" width="63" height="14" />
         </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1yp8lq8_di" bpmnElement="how-many-loops">
-        <dc:Bounds x="520" y="100" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Gateway_1ypep9x_di" bpmnElement="Gateway_1ypep9x" isMarkerVisible="true">
-        <dc:Bounds x="655" y="115" width="50" height="50" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="657" y="91" width="45" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_06m4d0g_di" bpmnElement="delete-loops">
-        <dc:Bounds x="630" y="240" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1sgzjme_di" bpmnElement="choose-best">
-        <dc:Bounds x="800" y="100" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0hwysv1_di" bpmnElement="start-making-loops">
         <dc:Bounds x="250" y="100" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0l5zxa3_di" bpmnElement="Activity_0zfqhsm">
-        <dc:Bounds x="800" y="240" width="100" height="80" />
+      <bpmndi:BPMNShape id="Gateway_0zhpma1_di" bpmnElement="Gateway_0zhpma1" isMarkerVisible="true">
+        <dc:Bounds x="755" y="115" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="749" y="85" width="62" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1rzt22f_di" bpmnElement="Event_1rzt22f">
+        <dc:Bounds x="912" y="122" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1yp8lq8_di" bpmnElement="how-many-loops">
+        <dc:Bounds x="610" y="100" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0d7dkol_di" bpmnElement="Activity_0d7dkol">
+        <dc:Bounds x="470" y="100" width="100" height="80" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

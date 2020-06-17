@@ -4,8 +4,8 @@
     <bpmn:startEvent id="StartEvent_1">
       <bpmn:outgoing>Flow_1ma1856</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:sequenceFlow id="Flow_1ma1856" sourceRef="StartEvent_1" targetRef="choose_instrument" />
-    <bpmn:sequenceFlow id="Flow_1civqjw" sourceRef="choose_instrument" targetRef="Activity_0xphrs1" />
+    <bpmn:sequenceFlow id="Flow_1ma1856" sourceRef="StartEvent_1" targetRef="choose_instrument_type" />
+    <bpmn:sequenceFlow id="Flow_1civqjw" sourceRef="choose_instrument_type" targetRef="Activity_0xphrs1" />
     <bpmn:exclusiveGateway id="Gateway_0bsp8li" name="How many instruments left?">
       <bpmn:incoming>Flow_1jcn5gb</bpmn:incoming>
       <bpmn:outgoing>Flow_1wjdfhx</bpmn:outgoing>
@@ -31,10 +31,10 @@
     <bpmn:sequenceFlow id="Flow_06o1avv" name="no" sourceRef="Gateway_1u97ttv" targetRef="Event_1ov4337">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!moreInstruments}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_1yn3yai" name="yes" sourceRef="Gateway_1u97ttv" targetRef="choose_instrument">
+    <bpmn:sequenceFlow id="Flow_1yn3yai" name="yes" sourceRef="Gateway_1u97ttv" targetRef="choose_instrument_type">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${moreInstruments}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:userTask id="choose_instrument" name="Choose instrument" camunda:formKey="choose-instrument">
+    <bpmn:userTask id="choose_instrument_type" name="Choose instrument type" camunda:formKey="choose-instrument-type">
       <bpmn:incoming>Flow_1yn3yai</bpmn:incoming>
       <bpmn:incoming>Flow_1ma1856</bpmn:incoming>
       <bpmn:outgoing>Flow_1civqjw</bpmn:outgoing>
@@ -130,7 +130,7 @@
           <dc:Bounds x="868" y="226" width="63" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0fbezpe_di" bpmnElement="choose_instrument">
+      <bpmndi:BPMNShape id="Activity_0fbezpe_di" bpmnElement="choose_instrument_type">
         <dc:Bounds x="230" y="137" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0u4ar07_di" bpmnElement="Activity_0xphrs1">
