@@ -1,5 +1,6 @@
 package fi.aleksi.workflow.controller;
 
+import fi.aleksi.workflow.entity.Alert;
 import fi.aleksi.workflow.entity.Instrument;
 import fi.aleksi.workflow.entity.Song;
 import fi.aleksi.workflow.entity.SongStatus;
@@ -8,6 +9,9 @@ import fi.aleksi.workflow.repository.InstrumentRepository;
 import fi.aleksi.workflow.repository.SongRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +22,9 @@ public class SongController {
     private final SongRepository songRepository;
     private final SongProcess songProcess;
     private final InstrumentRepository instrumentRepository;
+
+    @Autowired
+    private SimpMessageSendingOperations messagingTemplate;
 
     @Autowired
     public SongController(SongRepository songRepository, SongProcess songProcess, InstrumentRepository instrumentRepository) {
@@ -64,5 +71,10 @@ public class SongController {
     @GetMapping("/instrument")
     public List<Instrument> getAllInstruments() {
         return instrumentRepository.findAll();
+    }
+
+    @GetMapping("/alert-test")
+    public void alertTest() {
+        messagingTemplate.convertAndSend("/topic/alert", new Alert("test alert"));
     }
 }
