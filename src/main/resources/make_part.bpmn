@@ -42,7 +42,7 @@
     <bpmn:boundaryEvent id="Event_1uj8289" cancelActivity="false" attachedToRef="choose_instrument_type">
       <bpmn:outgoing>Flow_1jlbhzx</bpmn:outgoing>
       <bpmn:timerEventDefinition id="TimerEventDefinition_1ww7zl3">
-        <bpmn:timeCycle xsi:type="bpmn:tFormalExpression">R/PT1M</bpmn:timeCycle>
+        <bpmn:timeCycle xsi:type="bpmn:tFormalExpression">R/PT5M</bpmn:timeCycle>
       </bpmn:timerEventDefinition>
     </bpmn:boundaryEvent>
     <bpmn:endEvent id="Event_0st9ryp">

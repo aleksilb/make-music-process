@@ -15,7 +15,7 @@ public class WebSocket {
         this.messagingTemplate = messagingTemplate;
     }
 
-    public void sendAlert(String message) {
-        messagingTemplate.convertAndSend("/topic/alert", new Alert(message));
+    public void sendAlert(Long songId, String message) {
+        messagingTemplate.convertAndSend("/topic/alert/" + songId, new Alert(message));
     }
 }

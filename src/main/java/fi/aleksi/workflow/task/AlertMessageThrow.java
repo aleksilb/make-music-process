@@ -19,9 +19,9 @@ public class AlertMessageThrow implements JavaDelegate {
 
     @Override
     public void execute(DelegateExecution execution) {
-        //Long songId = (Long) execution.getVariable(ProcessVariables.SONG_ID);
+        Long songId = (Long) execution.getVariable(ProcessVariables.SONG_ID);
         String message = (String) execution.getVariable(ProcessVariables.ALERT_MESSAGE);
 
-        webSocket.sendAlert(message);
+        webSocket.sendAlert(songId, message);
     }
 }
