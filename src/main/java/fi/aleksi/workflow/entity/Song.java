@@ -21,11 +21,12 @@ public class Song {
     private String name;
     @Enumerated(EnumType.STRING)
     private SongStatus status;
-    @ManyToMany
-    @JoinTable(
+    @ElementCollection
+    @CollectionTable(
             name = "song_instrument",
-            joinColumns = @JoinColumn(name = "song_id"),
-            inverseJoinColumns = @JoinColumn(name = "instrument_id"))
+            joinColumns = @JoinColumn(name = "song_id"))
+    @Column(name = "instrument")
+    @Enumerated(EnumType.STRING)
     private Set<Instrument> instruments;
 
     public void addInstrument(Instrument instrument) {
